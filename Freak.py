@@ -20,7 +20,7 @@ while True:
     print("                      TOOL MADE BY apexvr_ ON TIKTOK")
     print("")
     print("1. Nmap Scan")
-    print("2 DDoS (DDoS Ripper)")
+    print("2. DDoS (DDoS Ripper)")
     print("3. Update")
     freakchoice = int(input(">>> "))
     if freakchoice == 3:
