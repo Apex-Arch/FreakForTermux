@@ -21,9 +21,10 @@ while True:
     print("")
     print("1. Nmap Scan")
     print("2. DDoS (DDoS Ripper)")
-    print("3. Update")
+    print("3. Zphisher")
+    print("4. Update")
     freakchoice = int(input(">>> "))
-    if freakchoice == 3:
+    if freakchoice == 4:
         os.system("apt update && apt install -y nmap")
         os.system("clear")
         os.system("apt update && apt install -y git")
@@ -33,9 +34,7 @@ while True:
         os.system("apt update && sudo apt install -y python")
         os.system("clear")
         os.system("apt update && apt install -y python3")
-        while True:
-            os.system("clear")
-        break
+        os.system("clear")
     elif freakchoice == 2:
         IPDDOS = input("TARGET IP: ")
         PORTDDOS = int(input("OPEN PORT: "))
@@ -45,5 +44,11 @@ while True:
     elif freakchoice == 1:
         IP = input("TARGET IP: ")
         METHOD = input("SCAN METHOD (sT, sS, Pn...): ")
-        os.system(f"sudo nmap -{METHOD} {IP}")
+        os.system(f"nmap -{METHOD} {IP}")
         time.sleep(5)
+    elif freakchoice == 3:
+        zphisher = os.path.join(os.getcwd(), "zphisher")
+        os.chdir(zphisher)
+        os.system("chmod +x zphisher.sh")
+        os.system("bash zphisher.sh")
+        
