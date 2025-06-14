@@ -1,11 +1,17 @@
 import os
 import time
 os.system("apt update && apt install -y nmap")
+os.system("clear")
 os.system("apt update && apt install -y git")
+os.system("clear")
 os.system("apt update && apt install -y wget")
+os.system("clear")
 os.system("apt update && apt install -y python")
+os.system("clear")
 os.system("apt update && apt install -y python3")
+os.system("clear")
 os.system("git clone https://github.com/palahsu/DDoS-Ripper.git")
+os.system("clear")
 ddosripper = os.path.join(os.getcwd(), "DDoS-Ripper")
 os.chdir(ddosripper)
 os.system("git clone --depth=1 https://github.com/htr-tech/zphisher.git")
