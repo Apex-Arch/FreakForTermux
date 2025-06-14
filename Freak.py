@@ -39,9 +39,10 @@ while True:
     print("1. Nmap Scan")
     print("2. DDoS (DDoS Ripper)")
     print("3. Zphisher")
-    print("4. Update dependencies")
+    print("98. Update dependencies")
+    print("99. Update Freak")
     freakchoice = int(input(">>> "))
-    if freakchoice == 4:
+    if freakchoice == 98:
         os.system("clear")
         print("[-] Updating nmap...")
         time.sleep(0.5)
@@ -79,4 +80,10 @@ while True:
         os.chdir(zphisher)
         os.system("chmod +x zphisher.sh")
         os.system("bash zphisher.sh")
+    elif freakchoice == 99:
+        os.chdir(os.path.expanduser("~"))
+        os.system("rm -rf FreakForTermux")
+        os.system("git clone https://github.com/Apex-Arch/FreakForTermux")
+        os.chdir("FreakForTermux")
+        os.system("python3 Freak.py")
         
