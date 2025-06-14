@@ -7,7 +7,7 @@ os.system("apt update && apt install -y python")
 os.system("apt update && apt install -y python3")
 ddosripper = os.path.join(os.getcwd(), "DDoS-Ripper")
 os.chdir(ddosripper)
-os.system("sudo git clone --depth=1 https://github.com/htr-tech/zphisher.git")
+os.system("git clone --depth=1 https://github.com/htr-tech/zphisher.git")
 while True:    
     os.system("clear")
     print("███████╗██████╗░███████╗░█████╗░██╗░░██╗")
