@@ -1,5 +1,6 @@
 import os
 import time
+os.system("clear")
 print("[-] Installing nmap...")
 time.sleep(0.5)
 os.system("apt update && sudo apt install -y nmap")
@@ -41,6 +42,7 @@ while True:
     print("4. Update dependencies")
     freakchoice = int(input(">>> "))
     if freakchoice == 4:
+        os.system("clear")
         print("[-] Updating nmap...")
         time.sleep(0.5)
         os.system("apt update && sudo apt install -y nmap")
