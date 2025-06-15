@@ -1,32 +1,55 @@
 import os
 import time
 import subprocess
-os.system("clear")
-print("[-] Installing nmap...")
-time.sleep(0.5)
-os.system("apt update && sudo apt install -y nmap")
-os.system("clear")
-print("[-] installing wget...")
-time.sleep(0.5)
-os.system("apt update && sudo apt install -y wget")
-os.system("clear")
-print("[-] installing python...")
-time.sleep(0.5)
-os.system("apt update && sudo apt install -y python")
-os.system("clear")
-print("[-] installing python3...")
-time.sleep(0.5)
-os.system("apt update && sudo apt install -y python3")
-os.system("clear")
-print("[-] installing DDoS Ripper...")
-time.sleep(0.5)
-os.system("git clone https://github.com/palahsu/DDoS-Ripper.git")
-os.system("clear")
-ddosripper = os.path.join(os.getcwd(), "DDoS-Ripper")
-os.chdir(ddosripper)
-print("[-] installing zphisher...")
-os.system("git clone --depth=1 https://github.com/htr-tech/zphisher.git")
-os.system("clear")
+import shutil
+# Define commands and repo paths
+tools = {
+    "nmap": {"type": "apt", "package": "nmap"},
+    "wget": {"type": "apt", "package": "wget"},
+    "DDos-Ripper": {
+        "type": "git",
+        "repo": "https://github.com/palahsu/DDoS-Ripper.git",
+        "path": "/opt/DDoS-Ripper"
+    },
+    "Zphisher": {
+        "type": "git",
+        "repo": "https://github.com/htr-tech/zphisher.git",
+        "path": "/opt/zphisher"
+    }
+}
+
+def is_installed(command):
+    return shutil.which(command) is not None
+
+def install_apt(package):
+    print(f"[+] Installing {package} via apt...")
+    subprocess.run(["sudo", "apt", "update"], check=True)
+    subprocess.run(["sudo", "apt", "install", "-y", package], check=True)
+
+def clone_repo(name, repo_url, path):
+    if os.path.isdir(path):
+        print(f"[✓] {name} is already cloned at {path}")
+    else:
+        print(f"[+] Cloning {name} from {repo_url}...")
+        subprocess.run(["sudo", "git", "clone", repo_url, path], check=True)
+
+def main():
+    for name, info in tools.items():
+        print(f"\n[?] Checking {name}...")
+        if info["type"] == "apt":
+            if is_installed(info["package"]):
+                print(f"[✓] {name} is already installed.")
+            else:
+                install_apt(info["package"])
+        elif info["type"] == "git":
+            clone_repo(name, info["repo"], info["path"])
+        else:
+            print(f"[!] Unknown type for {name}.")
+
+    print("\n[✔] All tools are installed or available.")
+
+if __name__ == "__main__":
+    main()
 while True:    
     os.system("clear")
     print("███████╗██████╗░███████╗░█████╗░██╗░░██╗")
@@ -45,27 +68,25 @@ while True:
     print("00. Exit")
     freakchoice = int(input(">>> "))
     if freakchoice == 98:
-        os.system("clear")
-        print("[-] Updating nmap...")
-        time.sleep(0.5)
-        os.system("apt update && sudo apt install -y nmap")
-        os.system("clear")
-        print("[-] Updating git...")
-        time.sleep(0.5)
-        os.system("apt update && sudo apt install -y git")
-        os.system("clear")
-        print("[-] Updating wget...")
-        time.sleep(0.5) 
-        os.system("apt update && sudo apt install -y wget")
-        os.system("clear")
-        print("[-] Updating python...")
-        time.sleep(0.5)
-        os.system("apt update && sudo apt install -y python")
-        os.system("clear")
-        print("[-] Updating python3...")
-        time.sleep(0.5)
-        os.system("apt update && sudo apt install -y python3")
-        os.system("clear")
+        packages_to_update = ["nmap", "wget", "python3", "python", "git"]
+    
+        print("\n[-] Checking and updating the following packages if new versions exist:")
+        for pkg in packages_to_update:
+            print(f"  - {pkg}")
+            time.sleep(0.7)
+    
+        try:
+            print("\n[+] Updating package lists...")
+            subprocess.run(["sudo", "apt", "update"], check=True)
+    
+            print("[+] Upgrading selected packages...")
+            for pkg in packages_to_update:
+                print(f"  -> Upgrading {pkg} (if available)...")
+                subprocess.run(["sudo", "apt", "install", "--only-upgrade", "-y", pkg], check=True)
+    
+            print("\n[-] Update check complete. Packages are up to date.")
+        except subprocess.CalledProcessError as e:
+            print(f"[!] Error during update: {e}")
     elif freakchoice == 2:
         IPDDOS = input("TARGET IP: ")
         PORTDDOS = int(input("OPEN PORT: "))
@@ -88,6 +109,13 @@ while True:
         if os.path.exists(repo_path):
             os.chdir(repo_path)
             subprocess.run(["git", "pull"])
+            time.sleep(2)
+        else:
+            os.chdir(home)
+            subprocess.run(["git", "clone", "https://github.com/Apex-Arch/FreakForLinux.git"])
+            os.chdir(repo_path)
+            subprocess.run(["python3", "Freak.py"])
+            time.sleep(2)
         else:
             os.chdir(home)
             subprocess.run(["git", "clone", "https://github.com/Apex-Arch/FreakForLinux.git"])
