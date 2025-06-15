@@ -1,5 +1,6 @@
 import os
 import time
+import subprocess
 os.system("clear")
 print("[-] Installing nmap...")
 time.sleep(0.5)
