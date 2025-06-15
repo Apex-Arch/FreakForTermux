@@ -92,4 +92,5 @@ while True:
             subprocess.run(["git", "clone", "https://github.com/Apex-Arch/FreakForLinux.git"])
             os.chdir(repo_path)
             subprocess.run(["python3", "Freak.py"])
+            time.sleep(2)
         
