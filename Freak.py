@@ -23,15 +23,15 @@ def is_installed(command):
 
 def install_apt(package):
     print(f"[+] Installing {package} via apt...")
-    subprocess.run(["sudo", "apt", "update"], check=True)
-    subprocess.run(["sudo", "apt", "install", "-y", package], check=True)
+    subprocess.run(["apt", "update"], check=True)
+    subprocess.run(["apt", "install", "-y", package], check=True)
 
 def clone_repo(name, repo_url, path):
     if os.path.isdir(path):
         print(f"[✓] {name} is already cloned at {path}")
     else:
         print(f"[+] Cloning {name} from {repo_url}...")
-        subprocess.run(["sudo", "git", "clone", repo_url, path], check=True)
+        subprocess.run(["git", "clone", repo_url, path], check=True)
 
 def main():
     for name, info in tools.items():
@@ -77,12 +77,12 @@ while True:
     
         try:
             print("\n[+] Updating package lists...")
-            subprocess.run(["sudo", "apt", "update"], check=True)
+            subprocess.run(["apt", "update"], check=True)
     
             print("[+] Upgrading selected packages...")
             for pkg in packages_to_update:
                 print(f"  -> Upgrading {pkg} (if available)...")
-                subprocess.run(["sudo", "apt", "install", "--only-upgrade", "-y", pkg], check=True)
+                subprocess.run(["apt", "install", "--only-upgrade", "-y", pkg], check=True)
     
             print("\n[-] Update check complete. Packages are up to date.")
         except subprocess.CalledProcessError as e:
