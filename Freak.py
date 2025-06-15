@@ -81,9 +81,14 @@ while True:
         os.system("chmod +x zphisher.sh")
         os.system("bash zphisher.sh")
     elif freakchoice == 99:
-        os.chdir(os.path.expanduser("~"))
-        os.system("rm -rf FreakForTermux")
-        os.system("git clone https://github.com/Apex-Arch/FreakForTermux")
-        os.chdir("FreakForTermux")
-        os.system("python3 Freak.py")
+        home = os.path.expanduser("~")
+        repo_path = os.path.join(home, "FreakForLinux")
+        if os.path.exists(repo_path):
+            os.chdir(repo_path)
+            subprocess.run(["git", "pull"])
+        else:
+            os.chdir(home)
+            subprocess.run(["git", "clone", "https://github.com/Apex-Arch/FreakForLinux.git"])
+            os.chdir(repo_path)
+            subprocess.run(["python3", "Freak.py"])
         
