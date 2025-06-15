@@ -2,7 +2,6 @@ import os
 import time
 import subprocess
 import shutil
-# Define commands and repo paths
 tools = {
     "nmap": {"type": "apt", "package": "nmap"},
     "wget": {"type": "apt", "package": "wget"},
@@ -73,8 +72,7 @@ while True:
         print("\n[-] Checking and updating the following packages if new versions exist:")
         for pkg in packages_to_update:
             print(f"  - {pkg}")
-            time.sleep(0.7)
-    
+            time.sleep(0.7)  
         try:
             print("\n[+] Updating package lists...")
             subprocess.run(["apt", "update"], check=True)
@@ -112,7 +110,7 @@ while True:
             time.sleep(2)
         else:
             os.chdir(home)
-            subprocess.run(["git", "clone", "https://github.com/Apex-Arch/FreakForLinux.git"])
+            subprocess.run(["git", "clone", "https://github.com/Apex-Arch/FreakForTermux.git"])
             os.chdir(repo_path)
             subprocess.run(["python3", "Freak.py"])
             time.sleep(2)
