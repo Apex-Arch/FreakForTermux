@@ -100,11 +100,14 @@ while True:
         METHOD = input("SCAN METHOD (sT, sS, Pn...): ")
         os.system(f"nmap -{METHOD} {IP}")
         time.sleep(5)
-    elif freakchoice == 3:
-        zphisher = os.path.join(os.getcwd(), "zphisher")
+    elif freakchoice == "3":
+        current_dir = os.getcwd()
+        zphisher = os.path.join(current_dir, "zphisher")
         os.chdir(zphisher)
         os.system("chmod +x zphisher.sh")
         os.system("bash zphisher.sh")
+        time.sleep(0.5)
+        os.chdir(current_dir)
     elif freakchoice == 99:
         home = os.path.expanduser("~")
         repo_path = os.path.join(home, "FreakForLinux")
