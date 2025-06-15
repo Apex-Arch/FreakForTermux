@@ -69,8 +69,8 @@ while True:
     print("98. Update dependencies")
     print("99. Update Freak")
     print("00. Exit")
-    freakchoice = int(input(">>> "))
-    if freakchoice == 98:
+    freakchoice = input(">>> "))
+    if freakchoice == "98":
         packages_to_update = ["nmap", "wget", "python3", "python", "git"]
     
         print("\n[-] Checking and updating the following packages if new versions exist:")
@@ -89,13 +89,13 @@ while True:
             print("\n[-] Update check complete. Packages are up to date.")
         except subprocess.CalledProcessError as e:
             print(f"[!] Error during update: {e}")
-    elif freakchoice == 2:
+    elif freakchoice == "2":
         IPDDOS = input("TARGET IP: ")
         PORTDDOS = int(input("OPEN PORT: "))
         print("Press CTRL + C to break")
         time.sleep(2)
         os.system(f"python3 DRipper.py -s {IPDDOS} -p {PORTDDOS} -t 443")
-    elif freakchoice == 1:
+    elif freakchoice == "1":
         IP = input("TARGET IP: ")
         METHOD = input("SCAN METHOD (sT, sS, Pn...): ")
         os.system(f"nmap -{METHOD} {IP}")
@@ -108,7 +108,7 @@ while True:
         os.system("bash zphisher.sh")
         time.sleep(0.5)
         os.chdir(current_dir)
-    elif freakchoice == 99:
+    elif freakchoice == "99":
         home = os.path.expanduser("~")
         repo_path = os.path.join(home, "FreakForLinux")
         if os.path.exists(repo_path):
@@ -121,7 +121,7 @@ while True:
             os.chdir(repo_path)
             subprocess.run(["python3", "Freak.py"])
             time.sleep(2)
-    elif freakchoice == 00:
+    elif freakchoice == "00":
         print("[-] Exiting...")
         time.sleep(0.7)
         break
