@@ -116,12 +116,6 @@ while True:
             os.chdir(repo_path)
             subprocess.run(["python3", "Freak.py"])
             time.sleep(2)
-        else:
-            os.chdir(home)
-            subprocess.run(["git", "clone", "https://github.com/Apex-Arch/FreakForLinux.git"])
-            os.chdir(repo_path)
-            subprocess.run(["python3", "Freak.py"])
-            time.sleep(2)
     elif freakchoice == 00:
         print("[-] Exiting...")
         time.sleep(0.7)
