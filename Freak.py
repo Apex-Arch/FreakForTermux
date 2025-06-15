@@ -3,48 +3,48 @@ import time
 import subprocess
 import shutil
 tools = {
-    "nmap": {"type": "apt", "package": "nmap"},
-    "wget": {"type": "apt", "package": "wget"},
-    "DDos-Ripper": {
+    "nmap": {"type": "pkg", "package": "nmap"},
+    "wget": {"type": "pkg", "package": "wget"},
+    "git": {"type": "pkg", "package": "git"},
+    "DDoS-Ripper": {
         "type": "git",
         "repo": "https://github.com/palahsu/DDoS-Ripper.git",
-        "path": "/opt/DDoS-Ripper"
+        "path": os.path.expanduser("~/DDoS-Ripper")
     },
     "Zphisher": {
         "type": "git",
         "repo": "https://github.com/htr-tech/zphisher.git",
-        "path": "/opt/zphisher"
+        "path": os.path.expanduser("~/zphisher")
     }
 }
 
 def is_installed(command):
     return shutil.which(command) is not None
 
-def install_apt(package):
-    print(f"[+] Installing {package} via apt...")
-    subprocess.run(["apt", "update"], check=True)
-    subprocess.run(["apt", "install", "-y", package], check=True)
+def install_pkg(package):
+    print(f"[+] Installing {package} via pkg...")
+    subprocess.run(["pkg", "install", "-y", package], check=True)
 
 def clone_repo(name, repo_url, path):
     if os.path.isdir(path):
-        print(f"[✓] {name} is already cloned at {path}")
+        print(f"[✓] {name} already exists at {path}")
     else:
-        print(f"[+] Cloning {name} from {repo_url}...")
+        print(f"[+] Cloning {name} from {repo_url} to {path}...")
         subprocess.run(["git", "clone", repo_url, path], check=True)
 
 def main():
+    print("[*] Checking tools and installing if missing...\n")
     for name, info in tools.items():
-        print(f"\n[?] Checking {name}...")
-        if info["type"] == "apt":
+        print(f"[?] Checking {name}...")
+        if info["type"] == "pkg":
             if is_installed(info["package"]):
                 print(f"[✓] {name} is already installed.")
             else:
-                install_apt(info["package"])
+                install_pkg(info["package"])
         elif info["type"] == "git":
             clone_repo(name, info["repo"], info["path"])
         else:
-            print(f"[!] Unknown type for {name}.")
-
+            print(f"[!] Unknown tool type for {name}")
     print("\n[✔] All tools are installed or available.")
 
 if __name__ == "__main__":
